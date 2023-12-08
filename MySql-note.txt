@@ -1,0 +1,281 @@
+Working with Databases
+********************** 
+  - Before we start working with Databases, we have to clearly understand what a database. 
+
+  What is a Database?
+  ******************* 
+    Definition: (Oracle)
+      A database is an organized collection of structured information, or data, typically stored electronically in a computer system.
+
+    - The traditional spreadsheet we use, the likes of Excel, are also great tools to organize collected data. Compared to Databases, they lack a couple of features which are very handy when it comes to data management. 
+      For example: 
+        - Lack of sufficient access control methods 
+        - Lack of creating an efficient collaboration methods 
+        - Inability to hold large amount of data
+        - etc ...   
+    
+    - A database is usually controlled by a database management system (DBMS).
+
+      Definition of DBMS: 
+        A Data Base Management System (DBMS) is a software for easy, efficient and reliable data processing and management. It can be used for:
+          - Creation of a database.
+          - Retrieval of information from the database.
+          - Updating the database.
+          - Controlling redundancy and inconsistency:
+          - Efficient memory management 
+          - Access Control and ease in accessing data 
+          - etc ... 
+
+    - Together, the data and the DBMS, along with the applications that are associated with them, are referred to as a database system, often shortened to just Database. 
+
+  Main Categories of Databases
+  ****************************
+    - We can divide the types of Databases in to two major categories based on how they structure and store data. 
+
+      1. Relational databases 
+      2. NoSQL databases
+
+    Relational databases
+    ******************** 
+      Definition:
+        A relational database is a type of database that stores and provides access to data points that are related to one another. 
+        
+          - Relational databases are based on the relational model, an intuitive, straightforward way of representing data in tables.
+
+          - Examples of Databases that use this model   
+            - MS SQL Server, Oracle Database and MySQL
+
+      What is Relational Model?
+      *************************
+        - The relational model is a standard way of representing and querying data that could be used by any application. 
+          - Before this standard, every database application used to have its own model. Which causes inefficiency when new users want to use it.  
+
+          - This model uses a tabular structure to store data and create relationships among the tables 
+
+          Ex: Lets build a tabular relational model for data that we could be using on Apple's website. Let's build this on Excel. 
+
+            apple.com/iphones 
+
+            - As you can see on the page, there are 3 different phones with their respective Name, price, image, description and so on. 
+
+            - This will be the tabular structure for the page 
+              https://docs.google.com/spreadsheets/d/1Z0lIIymTkTpBn0gfdPQ4Fq8i5OtgGQ3Cc6ZeBKxPgk4/edit#gid=0      
+
+    NoSQL databases
+    *************** 
+      Definition: 
+        NoSQL database is a database that uses a model that is different from the tabular relations used in relational databases. 
+
+        - Examples of Databases that use this model   
+          - MongoDB, CouchDB, HBase  
+
+      How data is saved in MangoDB
+      **************************** 
+
+        - In MongoDB, data is stored as documents. These documents are stored in MongoDB in JSON (JavaScript Object Notation) format.
+
+        Diagram: 
+          https://docs.mongodb.com/manual/_images/data-model-normalized.bakedsvg.svg
+
+  Working with Databases using Node.js 
+  ************************************* 
+
+    To understand how we can work with databases with Node, we have to clearly understand these of concepts first. 
+      
+      1. HTTP Verbs (Methods) 
+      2. The SQL Query language 
+
+    HTTP Verbs (Methods) 
+    ******************** 
+      HTTP defines a set of request methods to indicate the desired action to be performed for a given resource.
+
+      These are the most commonly used HTTP verbs. 
+        GET 
+          - Means I need to read some data and receive it
+        
+        POST 
+          - Means I have a new data that I need to be written or creating new data
+        
+        PUT and PATCH 
+          - Are for updating
+          - With PUT we have the option to say if data to be updated doesn't exist, create a new one
+      
+        DELETE
+          - Means, I need to remove some data 
+
+      Express and HTTP verbs
+      ********************** 
+        - As one of the above requests get to the Express web server, Express has methods that matches the names of the verbs. 
+
+          - For example, there is the get() method in Express to handle GET requests and so on for the others too. 
+
+          - We will see examples of how to use these methods below.  
+   
+    SQL Query language 
+    ****************** 
+
+      Definition: 
+        SQL is a query language used by nearly by all relational databases to query, manipulate, and define data, and to provide access control.
+
+        Differences between query and programing languages
+        **************************************************  
+
+          -  Query languages are aimed to manipulate data (usually create, read, update and delete it) whereas high-level programming languages are used by humans to instruct a computer which actions it has to do in order to solve some problem.
+          
+          - Query languages are usually declarative, i.e. you tell the software what you want instead of what it has to do. Programming languages, on the other hand, usually are imperative, i.e. you specify (in a human-readable way later translated to machine-readable code) what it has to do.
+
+      - SQL Queries are used to communicate with a database. That means we need to have a database ready and we also need a way to connect with the database from our Node server. 
+
+      Connecting with MySql Database using Node
+      ******************************************
+
+        MySQL Database
+        **************
+
+          To be able to use MySql database, you should have MySQL installed on your computer.
+
+            You can download a free MySQL database at https://www.mysql.com/downloads/ 
+
+            - The easier approach is to install one of the Web stacks like MAMP or WAMP that comes with MySql and phpMyAdmin to help us manage the database 
+
+        MySQL Driver
+        ************
+          - In a computer system, an adaptor program is required for making a connection to another system of different type.
+
+          - In a similar manner, we need an adaptor to create the interface between Node.js and MySql as they are two different systems. This software that serves as a connector of the two is called MySql Driver.  
+          
+          - Means, to access a MySQL database with Node.js, you need a MySQL driver.
+
+          - There is a "mysql" driver module that we can download from npm to create the connection 
+            npm install mysql
+
+        Connecting with MySql using Node
+        ******************************** 
+          Steps:
+            - Create the database 
+              - Create the DB
+            
+            - Prepare the credential information needed to connect with the database 
+              - Username, password, etc ... 
+              
+
+            - Install the "mysql" driver
+              - npm install mysql --save
+
+            - Import the module 
+              - const mysql = require("mysql");
+
+            - Use the createConnection method to create the connection object
+              Demo: 
+                - Create connection object  
+
+            - Use the connect method to create connection
+              Demo: 
+                - Connect to the database  
+
+      The most commonly used SQL Queries
+      ********************************** 
+        1. CREATE
+        2. INSERT
+        3. SELECT
+        4. UPDATE
+        5. DELETE 
+      
+      CREATE
+      ****** 
+        - CREATE statement is used to create a new table in a database
+
+        Syntax:
+          CREATE TABLE table_name (
+              column1 datatype,
+              column2 datatype,
+              column3 datatype,
+            ....
+          );
+
+        Demo: 
+          Create tables 
+
+      INSERT
+      ******
+        - INSERT statement is used to insert new records in a table
+
+        Syntax:
+          INSERT INTO table_name 
+            (column1, column2, column3, ...)
+          VALUES 
+            (value1, value2, value3, ...);
+
+        Demo: 
+          - Insert values 
+
+      SELECT
+      ******
+        - SELECT statement is used to select data from a database
+
+        Syntax: 
+          SELECT *
+          FROM table_name;
+
+        Demo: 
+          Serve JSON Object 
+
+        JOIN 
+
+        The most used filters on SELECT statement
+          WHERE
+          ORDER BY 
+          LIMIT 
+
+      UPDATE
+      ******
+        - UPDATE statement is used to modify the existing records in a table
+
+        Syntax: 
+          UPDATE table_name
+          SET column1 = value1, column2 = value2, ...
+          WHERE condition;
+
+      DELETE
+      ******
+        - DELETE statement is used to remove data from the database 
+
+          Syntax: 
+            DELETE FROM table_name WHERE condition;
+      
+
+
+
+
+      
+
+      
+
+      
+
+
+
+
+
+
+
+      
+
+
+
+
+
+
+
+          
+          
+          
+          
+    SQL
+    ***     
+      As more and more applications adapt this standard, developers began to use structured query language (SQL) to write and query data in a database. SQL is now the most common way of interacting with Relational Databases 
+
+
+
+
+
